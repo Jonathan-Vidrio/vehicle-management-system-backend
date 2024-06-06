@@ -43,6 +43,135 @@ export class VehicleService {
     );
   }
 
+  ////// Dashboard Reports //////
+
+  // Scorecard Reports
+  async getTotalMaintenancesByYear(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetTotalMaintenancesByYear(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getTotalMaintenancesByMonth(year: number, month: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetTotalMaintenancesByMonth(${year}, ${month})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehicleWithMostMaintenances(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleWithMostMaintenances(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+  // Scorecard Reports
+
+  async getMaintenanceCountByVehicleType(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetMaintenanceCountByVehicleType(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehicleMaintenancesByMonth(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleMaintenancesByMonth(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehiclesWithMostMaintenances(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehiclesWithMostMaintenances(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehicleUsageByVehicleType(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleUsageByVehicleType(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehicleUsageByMonth(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleUsageByMonth(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getVehicleWithMostUsage(year: number): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleWithMostUsage(${year})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  ////// Dashboard Reports //////
+
+  ////// Cube Reports //////
+
+  // Face 1: GetVehicleMaintenancesByMonthAndDepartment
+  async getVehicleMaintenancesByMonthAndDepartment(
+    year: number,
+    departmentId: number,
+  ): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetVehicleMaintenancesByMonthAndDepartment(${year}, ${departmentId})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  // Face 2: GetDepartmentMaintenancesByMonthAndVehicle
+  async getDepartmentMaintenancesByMonthAndVehicle(
+    year: number,
+    vehiclePlates: string,
+  ): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetDepartmentMaintenancesByMonthAndVehicle(${year}, '${vehiclePlates}')`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  async getMaintenancesInMonthByDepartmentAndVehicleType(
+    year: number,
+    departmentId: number,
+  ): Promise<any> {
+    return await this.vehicleRepository.sequelize.query(
+      `CALL GetMaintenancesInMonthByDepartmentAndVehicleType(${year}, ${departmentId})`,
+      {
+        type: QueryTypes.RAW,
+      },
+    );
+  }
+
+  ////// Cube Reports //////
+
   async update(
     id: number,
     updateVehicleDto: UpdateVehicleDto,
